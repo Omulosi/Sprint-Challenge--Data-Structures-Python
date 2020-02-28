@@ -13,7 +13,7 @@ class RingBuffer:
 
     def append(self, item):
         # overwrite oldest item in storage with new item
-        if len(self.storage) > self.capacity:
+        if len(self.storage) >= self.capacity:
             removed_node = self.storage.head
             self.storage.remove_from_head() # remove oldest item
             self.storage.add_to_tail(item)  # add new item - youngest
@@ -22,7 +22,7 @@ class RingBuffer:
 
         # Add is there still space to add in storage
 
-        else if len(self.storage) < self.capacity:
+        else:
             self.storage.add_to_tail(item)
             self.current = self.storage.head
 
@@ -50,7 +50,6 @@ class RingBuffer:
         return list_buffer_contents
 
 # ----------------Stretch Goal-------------------
-
 
 class ArrayRingBuffer:
     def __init__(self, capacity):
